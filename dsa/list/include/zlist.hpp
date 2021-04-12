@@ -2,8 +2,9 @@ template <typename T>
 class Zlist{
     T* ptr;
 public:
-    Zlist();
-    Zlist(T element, Zlist<T> list);
+    void ZList();
+    void ZList(T element, Zlist<T> list);
+
    //~Zlist();
    //T first();
    //Zlist<T> rest();
@@ -11,3 +12,13 @@ public:
    //void replaceFirst(T newElement);
    //void replaceRest(Zlist<T> newList);
 };
+
+template <typename T>
+void Zlist<T>::ZList(){
+
+};
+
+template <typename T>
+void Zlist<T>::ZList(T element, Zlist<T> list){
+
+}
