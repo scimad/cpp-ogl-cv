@@ -13,8 +13,8 @@ public:
     };
 
    T first();
-   //ZList<T> rest();
-   //bool IsEmptyList();
-   //void replaceFirst(T newElement);
+   ZList<T> rest();
+   bool IsEmptyList();
+   void replaceFirst(T newElement);
    //void replaceRest(ZList<T> newList);
 };
