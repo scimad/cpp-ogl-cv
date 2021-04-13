@@ -1,0 +1,1 @@
+add_library(zlist SHARED zlist.cpp)

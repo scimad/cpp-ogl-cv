@@ -1,24 +1,16 @@
 template <typename T>
-class Zlist{
+class ZList{
+    int _size;
+    int _max_size;
     T* ptr;
 public:
-    void ZList();
-    void ZList(T element, Zlist<T> list);
+    ZList();
+    ZList(T element, ZList<T>* list);
 
-   //~Zlist();
-   //T first();
-   //Zlist<T> rest();
+    ~ZList();
+   //T* first();
+   //ZList<T> rest();
    //bool IsEmptyList();
    //void replaceFirst(T newElement);
-   //void replaceRest(Zlist<T> newList);
+   //void replaceRest(ZList<T> newList);
 };
-
-template <typename T>
-void Zlist<T>::ZList(){
-
-};
-
-template <typename T>
-void Zlist<T>::ZList(T element, Zlist<T> list){
-
-}

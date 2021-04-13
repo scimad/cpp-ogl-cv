@@ -1,8 +1,8 @@
 project (zlist)
-cmake_minimum_required(VERSION 2.8)
+cmake_minimum_required(VERSION 3.0)
 
-include_directories(${CMAKE_SOURCE_DIR}/include)
-add_executable(list
-    src/zlist.cpp
-    testList.cpp
-)
+include_directories("include")
+add_subdirectory("src")
+
+add_executable(testlist testList.cpp)
+target_link_libraries(testlist zlist)
