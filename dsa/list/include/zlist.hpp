@@ -8,7 +8,11 @@ public:
     ZList(T element, ZList<T>* list);
 
     ~ZList();
-   //T* first();
+    int size(){
+        return _size;
+    };
+
+   T first();
    //ZList<T> rest();
    //bool IsEmptyList();
    //void replaceFirst(T newElement);
