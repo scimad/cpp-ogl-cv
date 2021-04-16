@@ -6,9 +6,6 @@ template <typename t>
 ZList<t>::ZList(){
     this->_size = 0;
     this->ptr = nullptr;
-    number++;
-    this->my_name = number;
-    std::cout << "Constructor: " << this->my_name << " ,a list was created." << std::endl;
 };
 
 template <typename t>
@@ -35,7 +32,6 @@ ZList<t>::ZList(t element, ZList<t>* list):ZList(){
 
 template <typename t>
 ZList<t>::~ZList(){
-    std::cout << "Destructor: " << this->my_name << ", a list was just deleted." << std::endl;
     delete [] this->ptr;
 };
 
