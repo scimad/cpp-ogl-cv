@@ -16,5 +16,6 @@ public:
    ZList<T> rest();
    bool IsEmptyList();
    void replaceFirst(T newElement);
+   T last();
    //void replaceRest(ZList<T> newList);
 };
