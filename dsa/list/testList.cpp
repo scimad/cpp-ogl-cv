@@ -5,11 +5,13 @@
 int main(int argc, char const *argv[])
 {
     ZList<int> intlist;
-    intlist.replaceFirst(10);
+    intlist.append(10);
     ZList<int> sec_list(20, &intlist);
     ZList<int> latest(50, &sec_list);
-    ZList<int> rest = latest.rest();
-    int last = latest.last();
-    std::cout << "The last element is " << last << std::endl;
+    std::cout << "The last element is " << latest.last() << std::endl;
+
+    for (int i = 0; i<latest.size(); i++){
+        std::cout << "apple = " << *(latest.ptr+i) << std::endl;
+    }
 
 }

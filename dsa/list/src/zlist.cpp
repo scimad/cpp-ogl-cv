@@ -6,12 +6,13 @@ template <typename t>
 ZList<t>::ZList(){
     this->_size = 0;
     this->ptr = nullptr;
-    // this->_max_size = 10;
-    // this->ptr = new t[_max_size];
+    number++;
+    this->my_name = number;
+    std::cout << "Constructor: " << this->my_name << " ,a list was created." << std::endl;
 };
 
 template <typename t>
-ZList<t>::ZList(const ZList<t>& list){
+ZList<t>::ZList(const ZList<t>& list):ZList(){
     // copy constructor
     this->_size = list.size();
     this->ptr = new t[this->_size];
@@ -22,9 +23,9 @@ ZList<t>::ZList(const ZList<t>& list){
 };
 
 template <typename t>
-ZList<t>::ZList(t element, ZList<t>* list){
+ZList<t>::ZList(t element, ZList<t>* list):ZList(){
     this->_size = list->size() + 1;
-    this->ptr = new t[this->_size];
+    this->ptr = new t[this->size()];
     this->replaceFirst(element);
 
     for (int i=0; i<list->size(); i++){
@@ -34,6 +35,7 @@ ZList<t>::ZList(t element, ZList<t>* list){
 
 template <typename t>
 ZList<t>::~ZList(){
+    std::cout << "Destructor: " << this->my_name << ", a list was just deleted." << std::endl;
     delete [] this->ptr;
 };
 
@@ -51,8 +53,8 @@ ZList<t> ZList<t>::rest() const{
     ZList<t> rest_list;
     if (!this->IsEmptyList())
     {
-        rest_list.ptr = new t[this->size()-1];
         rest_list._size = this->size()-1;
+        rest_list.ptr = new t[this->size()-1];
         for (int i=0; i<rest_list.size(); i++)
         {
            *(rest_list.ptr+i) = *(this->ptr+i+1);
@@ -71,18 +73,13 @@ bool ZList<t>::IsEmptyList() const{
 
 template <typename T>
 T ZList<T>::last() const{
-    std::cout << "So you need last element?" << std::endl;
     if (this->IsEmptyList()){
-        std::cout << "I am an empty list" << std::endl;
         throw std::runtime_error("Error: List is empty.");
     }else {
-        std::cout << "I am not an empty list" << std::endl;
         if (this->rest().IsEmptyList()){
-            std::cout << "this->rest() is an empty list" <<std::endl;
             return this->first();
         }
         else{
-            std::cout << "this->rest().last()"<<std::endl;
             return this->rest().last();
         }
     }
@@ -97,8 +94,27 @@ void ZList<T>::replaceFirst(T newElement){
 
     *this->ptr = newElement;
 };
+
+template <typename T>
+void ZList<T>::append(T element){
+    ZList<T> new_list = *this;
+    this->_size = this->size()+ 1;
+    delete []this->ptr;
+    this->ptr = new T[this->size()];
+    for (int i=0; i<this->size(); i++){
+        *(this->ptr+i) = *(new_list.ptr+i+1);
+    }
+    *(this->ptr+(this->size()-1)) = element;
+};
+
 template <typename T>
 void ZList<T>::append(ZList<T> list){
+    if (!list.IsEmptyList()){
 
+    }
 };
+
+template <typename T>
+int ZList<T>::number = 0;
+
 template class ZList<int>;
