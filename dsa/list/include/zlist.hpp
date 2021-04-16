@@ -1,12 +1,9 @@
 template <typename T>
 class ZList{
     int _size;
-    int _max_size;
-    int my_name;
-    
+
 public:
     T* ptr;
-    static int number;
     ZList();
     ZList(const ZList<T>&);
     ZList(T element, ZList<T>* list);

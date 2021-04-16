@@ -110,7 +110,4 @@ void ZList<T>::append(ZList<T> list){
     }
 };
 
-template <typename T>
-int ZList<T>::number = 0;
-
 template class ZList<int>;
