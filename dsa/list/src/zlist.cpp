@@ -101,16 +101,16 @@ void ZList<T>::append(T element){
     this->_size = this->size()+ 1;
     delete []this->ptr;
     this->ptr = new T[this->size()];
-    for (int i=0; i<this->size(); i++){
-        *(this->ptr+i) = *(new_list.ptr+i+1);
+    for (int i=0; i<this->size()-1; i++){
+        *(this->ptr+i) = *(new_list.ptr+i);
     }
     *(this->ptr+(this->size()-1)) = element;
 };
 
 template <typename T>
 void ZList<T>::append(ZList<T> list){
-    if (!list.IsEmptyList()){
-
+    for (int i=0; i<list.size(); i++){
+        this->append(*(list.ptr+i));
     }
 };
 
