@@ -2,6 +2,7 @@
 Implements Tree data structure and few algorithms
 '''
 
+
 class Node:
     '''
     This code is for class Node
@@ -35,17 +36,17 @@ class Node:
         t_h = Node('H')
         t_i = Node('I')
         t_d = Node('D')
-        t_d.set_lr(t_h,t_i)
+        t_d.set_lr(t_h, t_i)
 
         t_e = Node('E')
         t_b = Node('B')
-        t_b.set_lr(t_d,t_e)
+        t_b.set_lr(t_d, t_e)
 
         t_f = Node('F')
         t_g = Node('G')
 
         t_c = Node('C')
-        t_c.set_lr(t_f,t_g)
+        t_c.set_lr(t_f, t_g)
 
         t_a = Node('A')
         t_a.set_lr(t_b, t_c)
@@ -77,17 +78,17 @@ def start_end(traverse_func):
     '''
     decorator
     '''
-
     def wrapper(self, tree):
         '''
         One can use *args, **kwargs and expand the arguments
         but for now, it's okay to use self and tree
         '''
-        print (f'Starting: {traverse_func.__name__}.')
+        print(f'Starting: {traverse_func.__name__}.')
         traverse_func(self, tree)
-        print (f'Ending: {traverse_func.__name__}.')
+        print(f'Ending: {traverse_func.__name__}.')
 
     return wrapper
+
 
 class Traversal:
     '''
@@ -146,12 +147,13 @@ class Traversal:
         Function for bfs traversal of tree
         '''
         queue = [tree]
-        while len(queue)>0:
+        while len(queue) > 0:
             current = queue.pop(0)
             if current is not None:
-                print (current.name)
+                print(current.name)
                 queue.append(current.left)
                 queue.append(current.right)
+
 
 class TestCode:
     '''
@@ -177,7 +179,7 @@ class TestCode:
         # traversal.pre_order(t_a)
         # print ('----')
         traversal.bfs(t_a)
-        print ('----')
+        print('----')
 
         # traversal.in_order(t_1)
         # print ('----')
@@ -186,7 +188,8 @@ class TestCode:
         # traversal.post_order(t_1)
         # print ('----')
         traversal.bfs(t_1)
-        print ('----')
+        print('----')
+
 
 if __name__ == '__main__':
     test_code = TestCode()
