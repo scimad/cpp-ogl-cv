@@ -17,7 +17,7 @@ class BSNode:
     '''
     def __init__(self, key, value=None, left=None, right=None) -> None:
         self.key = key
-        self.value = key
+        self.value = 100 * key
         if value is not None:
             self.value = value
         self.left = left
@@ -73,18 +73,17 @@ class BS_Algo:
     def search_key(self, bs_tree, key):
         if bs_tree == None:
             print('data not found.')
-            return
+            return None
         print (f'currently scanning:{bs_tree.key}')
         if key == bs_tree.key:
-            print ('succesfully found.')
+            print (f'succesfully found. The value for the key {key} is {bs_tree.value}.')
             return bs_tree.value
         elif key < bs_tree.key:
             print('going left.')
-            self.search_key(bs_tree.left, key)
+            return self.search_key(bs_tree.left, key)
         elif key > bs_tree.key:
             print('going right.')
-            self.search_key(bs_tree.right, key)
-
+            return self.search_key(bs_tree.right, key)
 
 
 
@@ -102,7 +101,7 @@ class Solution:
         '''
         test_tree = BSNode.sample_case_1()
         bs_algo = BS_Algo()
-        bs_algo.search_key(test_tree,15)
+        bs_algo.search_key(test_tree,6)
 
 if __name__ == '__main__':
     Solution.run_test()
