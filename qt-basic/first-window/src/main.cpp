@@ -13,10 +13,5 @@ int main(int argc, char *argv[])
     QPushButton *button = new QPushButton(
             "Press me", &window
     );
-    button->move(100,100);
-    button->show();
 
-
-
-    return app.exec();
 }
