@@ -4,5 +4,5 @@ class Account{
    public:
    Account();
    ~Account();
-   int& salary(const int age, int& sal1, int& sal2);
+   const int& salary(const int& age, const int& sal1, const int& sal2);
 };

@@ -5,10 +5,10 @@ Account::Account(){
 Account::~Account(){
 }
 
-int& Account::salary(const int year, int& sal1, int& sal2){
+const int& Account::salary(const int& year, const int& sal1, const int& sal2){
     if (year > 50)
         return sal2;
     else
-	return sal1;
+        return sal1;
 
 }
