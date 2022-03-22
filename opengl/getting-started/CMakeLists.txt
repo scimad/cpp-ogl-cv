@@ -10,12 +10,9 @@ pkg_check_modules(glfw3 REQUIRED IMPORTED_TARGET glfw3)
 if(${glfw3_FOUND})
     MESSAGE("[ZR]: PKGCOFIG = " ${PKG_CONFIG_EXECUTABLE})
     MESSAGE("[ZR]: GLFW3 libraries = " ${glfw3_LIBRARIES})
-    MESSAGE("[ZR]: GLFLW link libraries = " ${glfw3_LINK_LIBRARIES})
+    MESSAGE("[ZR]: GLFW3 link libraries = " ${glfw3_LINK_LIBRARIES})
 endif()
 
-
-find_package(GLEW REQUIRED)
-
-include_directories( ${OPENGL_INCLUDE_DIRS}  ${glfw3_INCLUDE_DIRS} ${GLEW_INCLUDE_DIRS})
-target_sources(getting-started PRIVATE main.cpp)
-target_link_libraries(getting-started ${OPENGL_LIBRARIES} ${glfw3_LINK_LIBRARIES} ${GLEW_LIBRARIES})
+include_directories( ${OPENGL_INCLUDE_DIRS}  ${glfw3_INCLUDE_DIRS})
+target_sources(getting-started PRIVATE main.cpp) #src/glad.c)
+target_link_libraries(getting-started ${OPENGL_LIBRARIES} ${glfw3_LINK_LIBRARIES})
