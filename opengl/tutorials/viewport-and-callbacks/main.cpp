@@ -1,17 +1,11 @@
-#include "glad/glad.h"
+#include <glad/glad.h>
 
 #include <GLFW/glfw3.h>
 
 #include <fmt/core.h>
 #include <iostream>
-#include <string>
-#include <string_view>
 
-namespace zr{
-    void log(std::string message){
-        std::cout << "[ZR]: " << message << std::endl;
-    }
-}
+#include <ZR/core.hpp>
 
 void processInput(GLFWwindow *window){
     if(glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)

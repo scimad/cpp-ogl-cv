@@ -14,6 +14,6 @@ if(${glfw3_FOUND})
     MESSAGE("[ZR]: GLFW3 link libraries = " ${glfw3_LINK_LIBRARIES})
 endif()
 
-include_directories( ${OPENGL_INCLUDE_DIRS}  ${glfw3_INCLUDE_DIRS})
-target_sources(getting-started PRIVATE main.cpp src/glad.c)
+include_directories( ../../lib/include ${OPENGL_INCLUDE_DIRS}  ${glfw3_INCLUDE_DIRS})
+target_sources(getting-started PRIVATE main.cpp ../../lib/src/glad.c ../../lib/src/ZR/core.cpp)
 target_link_libraries(getting-started ${OPENGL_LIBRARIES} ${glfw3_LINK_LIBRARIES} ${CMAKE_DL_LIBS})

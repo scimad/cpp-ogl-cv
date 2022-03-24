@@ -14,12 +14,8 @@ if(${glfw3_FOUND})
     MESSAGE("[ZR]: GLFW3 link libraries = " ${glfw3_LINK_LIBRARIES})
 endif()
 
-find_package(fmt )
-set(fmt_FOUND TRUE)
-# MESSAGE("[ZR]: fmt libraries = " ${fmt_LINK_LIBRARIES})
-# MESSAGE("[ZR]: fmt libraries = " ${fmt_INCLUDE_DIRS})
+find_package(fmt)
 
-include_directories( ${OPENGL_INCLUDE_DIRS}  ${glfw3_INCLUDE_DIRS} ${fmt_INCLUDE_DIRS})
-target_sources(viewport PRIVATE main.cpp src/glad.c)
+include_directories( ../../lib/include ${OPENGL_INCLUDE_DIRS}  ${glfw3_INCLUDE_DIRS} ${fmt_INCLUDE_DIRS})
+target_sources(viewport PRIVATE main.cpp ../../lib/src/glad.c ../../lib/src/ZR/core.cpp)
 target_link_libraries(viewport ${OPENGL_LIBRARIES} ${glfw3_LINK_LIBRARIES} ${CMAKE_DL_LIBS} fmt::fmt)
-
