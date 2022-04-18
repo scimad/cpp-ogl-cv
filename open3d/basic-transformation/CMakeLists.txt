@@ -7,5 +7,4 @@ find_package (Eigen3 3.3 REQUIRED NO_MODULE)
 
 add_executable(getting-started)
 target_sources(getting-started PRIVATE main.cpp)
-MESSAGE ("I" ${Eigen_LIBRARIES})
 target_link_libraries(getting-started PRIVATE Open3D::Open3D Eigen3::Eigen)
