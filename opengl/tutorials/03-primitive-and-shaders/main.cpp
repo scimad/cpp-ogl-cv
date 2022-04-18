@@ -41,9 +41,9 @@ int main() {
   };
 
   // Create Vertex Buffer Object
-  unsigned int VBO;
-  glGenBuffers(1, &VBO);
-  glBindBuffer(GL_ARRAY_BUFFER, VBO);
+  unsigned int vboID;
+  glGenBuffers(1, &vboID);
+  glBindBuffer(GL_ARRAY_BUFFER, vboID);
   glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
   
   //write the vertex shader in the shader language GLSL (OpenGL Shading Language)
@@ -54,7 +54,74 @@ int main() {
     "   gl_Position = vec4(aPos.x, aPos.y, aPos.z, 1.0);\n"
     "}\0";
 
+  unsigned int vertexShaderID;
+  vertexShaderID = glCreateShader(GL_VERTEX_SHADER);
+  glShaderSource(vertexShaderID, 1, &vertexShaderSource, NULL);
+  bool shaderValid = glIsShader(vertexShaderID);
+  zr::log("shaderValid is ");
+  zr::log(std::to_string(shaderValid));
+  int success;
+  char infoLog[512];
+  glGetShaderiv(vertexShaderID, GL_COMPILE_STATUS, &success);
+
+  if (success == GL_FALSE){
+    glGetShaderInfoLog(vertexShaderID, 512, NULL, infoLog);
+    zr::log ("ERROR::SHADER::VERTEX::COMPILATION_FAILED.");
+    zr::log (infoLog);
+  }
+
+  // const char *fragmentShaderSource = "#version 330 core\n"
+  //   "out vec4 FragColor;\n"
+  //   "void main()\n"
+  //   "{\n"
+  //   "FragColor = vec4(1.0f, 0.5f, 0.2f, 1.0f);\n"
+  //   "}";
+
+  // unsigned int fragmentShaderID;
+  // fragmentShaderID = glCreateShader(GL_FRAGMENT_SHADER);
+  // glShaderSource(fragmentShaderID, 1, &fragmentShaderSource, NULL);
+  // glCompileShader(fragmentShaderID);
+
+
+  // unsigned int shaderProgramID;
+  // shaderProgramID = glCreateProgram();
+
+  // glAttachShader(shaderProgramID, vertexShaderID);
+  // glAttachShader(shaderProgramID, fragmentShaderID);
+  // glLinkProgram(shaderProgramID);
+
+
+  // glGetProgramiv(shaderProgramID, GL_LINK_STATUS, &success);
+  // if(!success) {
+  //     glGetProgramInfoLog(shaderProgramID, 512, NULL, infoLog);
+  //     std::cout << "ERROR::SHADER::Program::COMPILATION_FAILED\n" << infoLog << std::endl;
+  // }
+
+  // glUseProgram(shaderProgramID);
+  // glDeleteShader(vertexShaderID);
+  // glDeleteShader(fragmentShaderID);
+
+  // glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
+  // glEnableVertexAttribArray(0);
+
+  // unsigned int VAO;
+  // glGenVertexArrays(1, &VAO);
+  // glBindBuffer(GL_ARRAY_BUFFER, vboID);
+  // glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
+  // // 3. then set our vertex attributes pointers
+  // glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
+  // glEnableVertexAttribArray(0);
+
     
+  // //[...]
+
+  // // ..:: Drawing code (in render loop) :: ..
+  // // 4. draw the object
+  // glUseProgram(shaderProgramID);
+  // glBindVertexArray(VAO);
+
+  // glDrawArrays(GL_TRIANGLES, 0, 3);
+
   while (!glfwWindowShouldClose(window)) {
     processInput(window);
 
