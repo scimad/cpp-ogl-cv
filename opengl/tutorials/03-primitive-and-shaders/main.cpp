@@ -13,11 +13,12 @@ void processInput(GLFWwindow *window) {
 }
 
 int main() {
+  zr::log_level = zr::VERBOSITY_LEVEL::DEBUG;
   if (!glfwInit()) {
-    zr::log("GLFW initialization failed.");
+    zr::log("GLFW initialization failed.", zr::VERBOSITY_LEVEL::ERROR);
     return -1;
   }
-  zr::log("Successfully initialized GLFW.");
+  zr::log("Successfully initialized GLFW.", zr::VERBOSITY_LEVEL::DEBUG);
 
   GLFWwindow *window = glfwCreateWindow(800, 600, "ZR :: OpenGL", NULL, NULL);
   if (window == NULL) {
@@ -25,14 +26,14 @@ int main() {
     glfwTerminate();
     return -1;
   }
-  zr::log("Successfully created GLFW window.");
+  zr::log("Successfully created GLFW window.", zr::VERBOSITY_LEVEL::DEBUG);
 
   glfwMakeContextCurrent(window);
   if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress)) {
     zr::log("Failed to initialize GLAD");
     return -1;
   }
-  zr::log("Successfully initialized GLAD window.");
+  zr::log("Successfully initialized GLAD window.",zr::VERBOSITY_LEVEL::DEBUG);
 
   float  vertices[] = {
     -0.5f, -0.5f, 0.0f,
@@ -57,18 +58,18 @@ int main() {
   unsigned int vertexShaderID;
   vertexShaderID = glCreateShader(GL_VERTEX_SHADER);
   glShaderSource(vertexShaderID, 1, &vertexShaderSource, NULL);
-  bool shaderValid = glIsShader(vertexShaderID);
-  zr::log("shaderValid is ");
-  zr::log(std::to_string(shaderValid));
+  glCompileShader(vertexShaderID);
   int success;
   char infoLog[512];
   glGetShaderiv(vertexShaderID, GL_COMPILE_STATUS, &success);
 
   if (success == GL_FALSE){
     glGetShaderInfoLog(vertexShaderID, 512, NULL, infoLog);
-    zr::log ("ERROR::SHADER::VERTEX::COMPILATION_FAILED.");
-    zr::log (infoLog);
+    zr::log ("Vertex shader failed to compile with following error message:",zr::VERBOSITY_LEVEL::ERROR);
+    zr::log (infoLog,zr::VERBOSITY_LEVEL::ERROR);
+    return -1;
   }
+  zr::log ("Vertex shader compiled successfully.", zr::VERBOSITY_LEVEL::DEBUG);
 
   // const char *fragmentShaderSource = "#version 330 core\n"
   //   "out vec4 FragColor;\n"
