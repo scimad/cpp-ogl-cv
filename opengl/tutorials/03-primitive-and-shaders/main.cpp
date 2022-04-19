@@ -33,23 +33,13 @@ int main() {
     zr::log("Failed to initialize GLAD");
     return -1;
   }
-  zr::log("Successfully initialized GLAD window.", zr::VERBOSITY_LEVEL::DEBUG);
+  zr::log("Successfully initialized GLAD.", zr::VERBOSITY_LEVEL::DEBUG);
 
-  float  vertices[] = {
-    -0.5f, -0.5f, 0.0f,
-     0.5f, -0.5f, 0.0f,
-     0.0f,  0.5f, 0.0f
-  };
-
-  // Create Vertex Buffer Object
-  unsigned int vboID;
-  glGenBuffers(1, &vboID);
-  glBindBuffer(GL_ARRAY_BUFFER, vboID);
-  glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
-  
   //write the vertex shader in the shader language GLSL (OpenGL Shading Language)
-  const char *vertexShaderSource = "#version 330 core\n"
-    "layout (location = 0) in vec3 aPos;\n"
+  const char *vertexShaderSource =
+    "#version 330 core\n"
+    "layout (location = 0)\n"
+    "in vec3 aPos;\n"
     "void main()\n"
     "{\n"
     "   gl_Position = vec4(aPos.x, aPos.y, aPos.z, 1.0);\n"
@@ -71,7 +61,8 @@ int main() {
   }
   zr::log ("Vertex shader compiled successfully.", zr::VERBOSITY_LEVEL::DEBUG);
 
-  const char *fragmentShaderSource = "#version 330 core\n"
+  const char *fragmentShaderSource =
+    "#version 330 core\n"
     "out vec4 FragColor;\n"
     "void main()\n"
     "{\n"
@@ -99,6 +90,8 @@ int main() {
   glAttachShader(shaderProgramID, vertexShaderID);
   glAttachShader(shaderProgramID, fragmentShaderID);
   glLinkProgram(shaderProgramID);
+  glDeleteShader(vertexShaderID);
+  glDeleteShader(fragmentShaderID);
 
   glGetProgramiv(shaderProgramID, GL_LINK_STATUS, &success);
   if(!success) {
@@ -106,14 +99,29 @@ int main() {
       zr::log ("Linking of shaders failed with following error message:", zr::VERBOSITY_LEVEL::ERROR);
       zr::log (infoLog, zr::VERBOSITY_LEVEL::ERROR);
   }
+  zr::log ("Shader programs linked successfully.", zr::VERBOSITY_LEVEL::DEBUG);
 
-  //TODO: Study about glVertexAttribPointer params
+  float  vertices[] = {
+    -0.5f, -0.5f, 0.0f,
+     0.5f, -0.5f, 0.0f,
+     0.0f,  0.5f, 0.0f
+  };
+
+  // Create Vertex Array Object
+  // unsigned int vaoID;
+  // glGenVertexArrays(1, &vaoID);
+  // glBindVertexArray(vaoID);
+
+  // Create Vertex Buffer Object
+  unsigned int vboID;
+  glGenBuffers(1, &vboID);
+  glBindBuffer(GL_ARRAY_BUFFER, vboID);
+  glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
+
   glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
   glEnableVertexAttribArray(0);
 
   glUseProgram(shaderProgramID);
-  glDeleteShader(vertexShaderID);
-  glDeleteShader(fragmentShaderID);
 
   while (!glfwWindowShouldClose(window)) {
     processInput(window);
@@ -121,6 +129,10 @@ int main() {
     glfwSwapBuffers(window);
     glfwPollEvents();
   }
+
+  glDeleteVertexArrays(1, &vboID);
+  // glDeleteBuffers(1, &vaoID);
+  glDeleteProgram(shaderProgramID);
 
   glfwTerminate();
   return 0;
