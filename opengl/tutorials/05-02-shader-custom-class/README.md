@@ -1,11 +1,12 @@
-# Element Buffers
+# Custom Shader Class
 
-Based on Hello Triangle Tutorial on learnopengl.com
+Based on Shaders Tutorial on learnopengl.com
 
 ## Keywords
-graphics pipeline, shaders, element buffer
+shaders, uniform
 
 ### Note
-I haven't used VAOs. One should use.
+To run the program, the shaders must be in the parent level directory of the executable.
 # Reference
-* [Hello Triangle](https://learnopengl.com/Getting-started/Hello-Triangle)
+* [Shaders](https://learnopengl.com/Getting-started/Shaders)
+
