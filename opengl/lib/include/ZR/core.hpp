@@ -1,3 +1,6 @@
+#ifndef ZR_CORE_H
+#define ZR_CORE_H
+
 #include <iostream>
 #include <string>
 
@@ -8,3 +11,4 @@ namespace zr{
 	extern VERBOSITY_LEVEL log_level;
 	void log(std::string, zr::VERBOSITY_LEVEL error_level=VERBOSITY_LEVEL::INFO);
 }
+#endif
