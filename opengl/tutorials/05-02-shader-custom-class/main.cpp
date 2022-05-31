@@ -97,9 +97,9 @@ int main() {
     glfwPollEvents();
   }
 
+  glDeleteBuffers(1, &vboID);
   glDeleteVertexArrays(1, &eboID);
-  // glDeleteBuffers(1, &vaoID);
-  // glDeleteProgram(shaderProgramID);
+  // glDeleteBuffers(1, &vaoID);              //Unsure why this is working (maybe because we only have one VAO)
 
   glfwTerminate();
   zr::log("Exiting gracefully.");

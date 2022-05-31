@@ -19,7 +19,8 @@ private:
   /* data */
 public:
 unsigned int shaderProgramID;
-Shader(const char* vertexPath, const char* fragmentPath);
+  Shader(const char* vertexPath, const char* fragmentPath);
+  ~Shader();
   void use();
   void setBool(const std::string &uniform_name, bool value) const;
   void setInt(const std::string &uniform_name, int value) const;
@@ -40,6 +41,13 @@ void Shader::setFloat(const std::string &uniform_name, float value) const{
 
 void Shader::use(){
     glUseProgram(shaderProgramID);
+}
+
+Shader::~Shader(){
+    // Following call seems not to be necessary. (But not exactly sure how.)
+    // glDeleteProgram(shaderProgramID);
+    // Above line when enabled causes seg. fault in combination with glfwTerminate()
+    zr::log("Shader program deleted from OpenGL memory.");
 }
 
 Shader::Shader(const char* vertexPath, const char* fragmentPath){
