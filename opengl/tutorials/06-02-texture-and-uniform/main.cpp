@@ -109,12 +109,13 @@ int main() {
   glEnableVertexAttribArray(2);
 
   Shader ourShader ("../texture.vs", "../texture.fs");
+  ourShader.use();
+
 
   while (!glfwWindowShouldClose(window)) {
     processInput(window);
     glClearColor(0.9, 1.0, 0.7, 0.4);
     glClear(GL_COLOR_BUFFER_BIT);
-    ourShader.use();
 
     float timeValue = glfwGetTime();
     ourShader.setFloat("r", sin(timeValue/1.111));
