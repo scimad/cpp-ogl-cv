@@ -88,9 +88,9 @@ int main() {
 
   float vertices[] = {
       0.5f,  0.5f, 0.0f, 1.0f, 0.0f, 0.0f, 1.0f, 1.0f,   // top right
-      0.5f, -0.5f, 0.0f, 0.0f, 1.0f, 0.0f, 1.0f, 0.0f,   // bottom right
+      0.5f, -0.5f, 0.0f, 1.0f, 1.0f, 0.0f, 1.0f, 0.0f,   // bottom right
       -0.5f, -0.5f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f,  // bottom left
-      -0.5f,  0.5f, 0.0f, 1.0f, 1.0f, 1.0f, 0.0f, 1.0f   // top left
+      -0.5f,  0.5f, 0.0f, 0.0f, 1.0f, 1.0f, 0.0f, 1.0f   // top left
   };
   unsigned int indices[] = {  // note that we start from 0!
       0, 1, 3,   // first triangle
@@ -98,10 +98,10 @@ int main() {
   };
 
   glm::mat4 trans = glm::mat4(1.0f);
-
   glm::mat4 model = glm::mat4(1.0f);
   glm::mat4 view = glm::mat4(1.0f);
 
+  model = glm::rotate(model, glm::radians(-55.0f), glm::vec3(1.0f, 0.0f, 0.0f));
   view = glm::translate(view, glm::vec3(0.0f, 0.0f, -3.0f));
   glm::mat4 projection = glm::mat4(1.0f);
   projection = glm::perspective(glm::radians(45.0f), 800.0f/600.0f, 0.1f, 100.0f);
@@ -172,10 +172,9 @@ int main() {
     trans = glm::mat4(1.0f);
 
     // object rotates about z axis
-    trans = glm::rotate(trans, 0.5f*timeValue*anglular_velocity, glm::vec3(0.0f, 0.0f, 1.0f));
+    // trans = glm::rotate(trans, 0.5f*timeValue*anglular_velocity, glm::vec3(0.0f, 0.0f, 1.0f));
     glUniformMatrix4fv(transformLoc, 1, GL_FALSE, glm::value_ptr(trans));
 
-    model = glm::rotate(trans, timeValue*0.5f*anglular_velocity, glm::vec3(0.0f, 1.0f, 0.0f));
     glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
 
     // as we only have a single VAO there's no need to bind it every time
