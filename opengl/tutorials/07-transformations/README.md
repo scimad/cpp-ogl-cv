@@ -1,10 +1,10 @@
-# Texture Units
+# Transformations
 
 Based on Shaders Tutorial on learnopengl.com
 
 ## Keywords
-texture, shaders, uniform, texture units
+rotation, scaling, translation
 
 # Reference
-* [Shaders](https://learnopengl.com/Getting-started/Textures)
+* [Shaders](https://learnopengl.com/Getting-started/Transformations)
 
