@@ -1,9 +1,9 @@
 # Camera Basics
 
-Based on Shaders Tutorial on learnopengl.com
+Based on Camera Tutorial on learnopengl.com
 
 ## Keywords
 camera, view, lookat, upvector
 
 # Reference
-* [Coordinate Systems](https://learnopengl.com/Getting-started/Camera)
+* [Camera](https://learnopengl.com/Getting-started/Camera)

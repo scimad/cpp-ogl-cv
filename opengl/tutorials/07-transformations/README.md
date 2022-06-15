@@ -1,10 +1,10 @@
 # Transformations
 
-Based on Shaders Tutorial on learnopengl.com
+Based on Transformation Tutorial on learnopengl.com
 
 ## Keywords
 rotation, scaling, translation
 
 # Reference
-* [Shaders](https://learnopengl.com/Getting-started/Transformations)
+* [Transformation](https://learnopengl.com/Getting-started/Transformations)
 

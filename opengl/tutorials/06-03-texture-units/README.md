@@ -1,10 +1,10 @@
 # Texture Units
 
-Based on Shaders Tutorial on learnopengl.com
+Based on Textures Tutorial on learnopengl.com
 
 ## Keywords
 texture, shaders, uniform, texture units
 
 # Reference
-* [Shaders](https://learnopengl.com/Getting-started/Textures)
+* [Textures](https://learnopengl.com/Getting-started/Textures)
 
