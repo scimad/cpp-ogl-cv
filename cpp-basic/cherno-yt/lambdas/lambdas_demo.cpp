@@ -17,4 +17,10 @@ int main(int argc, char const *argv[])
 
     std::cout << "a = " << a << " and b = " << b << std::endl;
 
+    auto lambda_div_func = [a, b] (int divisor){
+        return (a + b ) / divisor;
+    };
+
+    std::cout << "A + B divided by 5 is " << lambda_div_func(5) << std::endl;
+
 }
