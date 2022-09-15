@@ -12,6 +12,9 @@
 #### Static Cast
 * Can do implicit like conversions
 
+#### Dynamic cast
+* Used usually for downcasting (i.e. you have a Base Class pointer or reference and you want to cast it to more complex derived class.)
+
 ### Advantage of C++ style casts
 
 * Compiletime checks
