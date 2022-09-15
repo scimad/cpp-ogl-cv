@@ -10,3 +10,6 @@ add_executable(smart-ptr smart-pointers/shared-unique-weak.cpp)
 add_executable(static-cast casting/casting-example.cpp)
 add_executable(dynamic-cast casting/dynamic-casting.cpp)
 add_executable(dynamic-2 casting/dynamic-another.cpp)
+
+add_executable(multithreading multithreading/file-copy.cpp)
+target_compile_features(multithreading PRIVATE cxx_std_17)          #set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++17")
