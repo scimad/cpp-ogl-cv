@@ -11,7 +11,7 @@ add_executable(static-cast casting/casting-example.cpp)
 add_executable(dynamic-cast casting/dynamic-casting.cpp)
 add_executable(dynamic-2 casting/dynamic-another.cpp)
 
-set(THREADS_PREFER_PTHREAD_FLAG ON)
+# set(THREADS_PREFER_PTHREAD_FLAG ON)
 find_package(Threads REQUIRED)
 add_executable(multithreading multithreading/file-copy.cpp)
 target_link_libraries(multithreading Threads::Threads )
