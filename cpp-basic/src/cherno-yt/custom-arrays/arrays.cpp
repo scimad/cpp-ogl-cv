@@ -1,6 +1,8 @@
 #include<iostream>
 #include<array>
 #include<string>
+#include<stdexcept>
+#include<cstring>
 
 void* operator new(size_t size){
     void* ptr = malloc(size);
@@ -29,13 +31,31 @@ public:
     }
 
     T& operator[](size_t pos){
-        return m_Data[pos];
+        if (pos<size)
+            return m_Data[pos];
+        else
+            throw std::invalid_argument("Invalid index size");
     }
-
 
     T at(size_t pos){
         return m_Data[pos];
     }
+
+    T* GetPtr(){
+        return m_Data;
+    }
+
+    const T* GetPtr() const{
+        return m_Data;
+    }
+
+    void clearArray(){
+        for (size_t i = 0; i<size; i++){
+            std::cout << "Address to clear " << &m_Data[i] << "Size = " << sizeof(*m_Data) << "Bytes" << std:: endl;
+            // memset(&m_Data[i], 0, sizeof(*m_Data[i]));
+        }
+    }
+
     ~MyArray(){
 
     };
@@ -75,13 +95,22 @@ int main(){
 
     for (int i=0; i<5; i++){
         std::cout << m_array.at(i) << std::endl;
-        m_array[i] = std::string("Nepal");
+        m_array[i] = [](int n){
+            std::string my_string;
+            for (int j=0; j<n; j++){
+                my_string = my_string + "MadhavHumagain";
+            }
+            std::cout << "Adding " << sizeof(my_string) << " bytes string to array" << std::endl;
+            return my_string;
+        }(i);
         std::cout << m_array.at(i) << std::endl;
-
     }
 
     std::cout << "Hit Enter key to exit.";
     std::cin.get();
+
+    m_array.clearArray();
+    std::cout << "Cleared" << std::endl;
 
 
     return 0;
