@@ -19,3 +19,5 @@ target_compile_features(multithreading PRIVATE cxx_std_17)          #set(CMAKE_C
 
 add_executable(string-view string_view/string_view.cpp)
 target_compile_features(string-view PRIVATE cxx_std_17)          #set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++17")
+
+add_executable(custom-array custom-arrays/arrays.cpp)
