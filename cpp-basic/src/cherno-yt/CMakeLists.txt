@@ -9,7 +9,7 @@ add_executable(any-size-array static-arrays/loop-anysize-array.cpp)
 add_executable(smart-ptr smart-pointers/shared-unique-weak.cpp)
 add_executable(static-cast casting/casting-example.cpp)
 add_executable(dynamic-cast casting/dynamic-casting.cpp)
-add_executable(dynamic-2 casting/dynamic-another.cpp)
+add_executable(dynamic-cast-2 casting/dynamic-another.cpp)
 
 # set(THREADS_PREFER_PTHREAD_FLAG ON)
 find_package(Threads REQUIRED)
@@ -21,3 +21,4 @@ add_executable(string-view string_view/string_view.cpp)
 target_compile_features(string-view PRIVATE cxx_std_17)          #set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++17")
 
 add_executable(custom-array custom-arrays/arrays.cpp)
+add_executable(dynamic-array dynamic-arrays/basic.cpp)
