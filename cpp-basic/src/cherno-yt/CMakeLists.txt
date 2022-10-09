@@ -10,6 +10,9 @@ add_executable(smart-ptr smart-pointers/shared-unique-weak.cpp)
 add_executable(static-cast casting/casting-example.cpp)
 add_executable(dynamic-cast casting/dynamic-casting.cpp)
 add_executable(dynamic-cast-2 casting/dynamic-another.cpp)
+add_executable(new-delete custom-alloc/new-delete.cpp)
+add_executable(custom-string custom-strings/basic.cpp)
+
 
 # set(THREADS_PREFER_PTHREAD_FLAG ON)
 find_package(Threads REQUIRED)
