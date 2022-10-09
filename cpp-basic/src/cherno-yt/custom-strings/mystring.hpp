@@ -1,20 +1,22 @@
+#ifndef __MY_STRING__
+#define __MY_STRING__
 #include <cstring>
 #include "../custom-alloc/custom-alloc.hpp"
 
 class myString{
     size_t len=0;
 public:
-    char* charBuf = new char[0];
+    char* charBuf;// = new char[0];
     myString(){
         std::cout << "[myString]: Calling default constructor for mystring." << std::endl;
         len = 0;
-        delete[] charBuf;
-        charBuf = new char[1];
-        charBuf[0] = '\0';
+        // delete[] charBuf;
+        // charBuf = new char[1];
+        // charBuf[0] = '\0';
     }
 
     myString(const char* str){
-        delete[] charBuf;
+        // delete[] charBuf;
         len = strlen(str);
         charBuf = new char[len+1];
         std::cout << "[myString]: Creating a new mystring from const char* of length " << len << std::endl;
@@ -39,3 +41,5 @@ public:
         return os;
     }
 };
+#endif
+
