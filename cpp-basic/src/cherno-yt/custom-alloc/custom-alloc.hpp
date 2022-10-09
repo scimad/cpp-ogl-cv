@@ -1,3 +1,6 @@
+#ifndef __CUSTOM_ALLOC__
+# define __CUSTOM_ALLOC__
+
 #include <stddef.h>
 #include <stdlib.h>
 #include <iostream>
@@ -23,3 +26,5 @@ void operator delete[](void* ptr, size_t size){
     std::cout << "[delete[]]: Freeing up heap memory at location:" << ptr << std::endl;
     free(ptr);
 }
+
+#endif
