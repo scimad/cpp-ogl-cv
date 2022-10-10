@@ -14,50 +14,50 @@ private:
     size_t capacity;
     T** resize();
     T at(size_t index);
-    T** T_objects = new T*[0];
+    T** T_ptr = new T*[0];
 
     // returns new location if succesful and nullptr if allocation wasn't succesful
     T** resize(size_t new_capacity){
-        std::cout << "resize: Resizing from " << capacity << " to " << new_capacity << "." << std::endl;
-
-        T** newT_objects = new T*[new_capacity];
-        for (size_t i=0; i<(new_capacity?new_capacity<capacity:capacity); ++i){
-            //need to invoke copy constructor
-            newT_objects[i] = std::move(T_objects[i]);
+        std::cout << "[resize]: Resizing from " << capacity << " to " << new_capacity << "." << std::endl;
+        T** newT_ptr = new T*[new_capacity];
+        for (size_t i=0; i<(new_capacity<capacity?new_capacity:capacity); ++i){
+            //need to copy pointers of objects
+            newT_ptr[i] = T_ptr[i];
         }
         capacity = new_capacity;
-        delete[] T_objects;
-        T_objects = newT_objects;
-        std::cout << "resize: Resized." << std::endl;
-        return T_objects;
+        delete[] T_ptr;
+        T_ptr = newT_ptr;
+        std::cout << "[resize]: Resized." << std::endl;
+        return T_ptr;
     }
 
 public:
     DynamicArray(size_t size = 10){
-        std::cout << "DynamicArray: Creating DA of size " << size << "."<< std::endl;
+        std::cout << "[DynamicArray]: Creating..."<< std::endl;
         this->capacity = size;
         this->n = 0;
         // Heap Allocation
-        delete[] T_objects;
-        T_objects = new T*[capacity];
+        delete[] T_ptr;
+        T_ptr = new T*[capacity];
     }
 
     DynamicArray(size_t size, T _default):DynamicArray(size){
-        std::cout<< "DynamicArray: Initialized array with value: " << _default << std::endl;
+        if (zr::custom_alloc_verbose == true)
+            std::cout<< "[DynamicArray]: Initialized array with value: " << _default << std::endl;
         for (size_t i = 0; i < size; i++){
             this->push_back(_default);
         }
     }
 
     ~DynamicArray(){
-        std::cout<< "~DynamicArray: Calling destructor." << std::endl;
-        delete[] T_objects;
+        std::cout<< "[~DynamicArray]: Calling destructor." << std::endl;
+        delete[] T_ptr;
     };
 
     //To access the data
     const T& operator[](size_t index) const{
         if (index<n)
-            return *(T_objects[index]);
+            return *(T_ptr[index]);
         else
             throw std::invalid_argument("Invalid index size");
     }
@@ -65,7 +65,7 @@ public:
     //To modify data
     T& operator[](size_t index){
         if (index<n)
-            return *(T_objects[index]);
+            return *(T_ptr[index]);
         else
             throw std::invalid_argument("Invalid index size");
     }
@@ -75,8 +75,10 @@ public:
             // resize the array and copy to new place
             this->resize((this->capacity+1)*3/2);
         }
-        std::cout << "[push_back]:Pushing back (at index " << n << ")." << std::endl;
-        this->T_objects[n] = new T(value);
+        if (zr::custom_alloc_verbose == true)
+            std::cout << "[push_back]:Pushing back (at index " << n << ")." << std::endl;
+        //invoke move semantics
+        this->T_ptr[n] = new T(std::move(value)); //new T(value);
         n++;
     }
 
