@@ -8,18 +8,14 @@ class myString{
 public:
     char* charBuf;// = new char[0];
     myString(){
-        std::cout << "[myString]: Calling default constructor for mystring." << std::endl;
+        std::cout << "[myString]: Creating..." << std::endl;
         len = 0;
-        // delete[] charBuf;
-        // charBuf = new char[1];
-        // charBuf[0] = '\0';
     }
 
-    myString(const char* str){
+    myString(const char* str):myString(){
         // delete[] charBuf;
         len = strlen(str);
         charBuf = new char[len+1];
-        std::cout << "[myString]: Creating a new mystring from const char* of length " << len << std::endl;
         for (size_t i=0; i<len; i++){
             charBuf[i] = str[i];
         }
@@ -28,10 +24,15 @@ public:
 
     //create new charBuf while copying
     myString(const myString& my_str):myString(my_str.charBuf){
-        std::cout << "[myString]: Copy constructor invoked." << std::endl;
+        std::cout << "[myString]: Copying..." << std::endl;
+    }
+
+    myString(const myString&& my_str):myString(my_str.charBuf){
+        std::cout << "[myString]: Moving!!!" << std::endl;
     }
 
     ~myString(){
+        std::cout << "[myString]: Deleting..." << std::endl;
         delete[] charBuf;
         len = 0;
     }
