@@ -4,9 +4,57 @@
 #include "../custom-alloc/custom-alloc.hpp"
 #include "../custom-strings/mystring.hpp"
 
+template<typename T>
+class DynamicArrayIterator{
+    T** m_Ptr;
+public:
+    DynamicArrayIterator(T** ptr):m_Ptr(ptr){};
 
-// typedef myString T;
-// typedef std::string T;
+    DynamicArrayIterator<T>& operator++(){
+        m_Ptr++;
+        return *this;
+    };
+
+    // Not being able to write the following override version
+    // DynamicArrayIterator<T> operator++(){
+    //     DynamicArrayIterator<T> it = *this;
+    //     ++(*this);
+    //     return it;
+    // };
+
+    DynamicArrayIterator<T>& operator--(){
+        m_Ptr--;
+        return *this;
+    };
+
+    // Not being able to write the following override version
+    // DynamicArrayIterator<T> operator--(){
+    //     DynamicArrayIterator<T> it = *this;
+    //     --(*this);
+    //     return it;
+    // };
+
+    T& operator[](size_t index){
+        return **(m_Ptr+index);
+    };
+
+    T* operator->(){
+        return *m_Ptr;
+    };
+
+    T& operator*(){ //to ensure assignments
+        return **m_Ptr;
+    };
+
+    bool operator == (const DynamicArrayIterator& other) const{
+        return m_Ptr == other.m_Ptr;
+    };
+
+    bool operator != (const DynamicArrayIterator& other) const{
+        return !(m_Ptr == other.m_Ptr);
+    };
+};
+
 template <typename T>
 class DynamicArray{
 private:
@@ -57,6 +105,14 @@ public:
             (*T_ptr[i]).~T();
         }
         delete[] T_ptr;
+    };
+
+    DynamicArrayIterator<T> begin(){
+        return DynamicArrayIterator<T>(T_ptr);
+    };
+
+    DynamicArrayIterator<T> end(){
+        return DynamicArrayIterator<T>(T_ptr + n); //pointer arithmetic
     };
 
     //To access the data

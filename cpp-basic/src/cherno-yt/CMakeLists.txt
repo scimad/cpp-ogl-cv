@@ -25,3 +25,9 @@ target_compile_features(string-view PRIVATE cxx_std_17)          #set(CMAKE_CXX_
 
 add_executable(custom-array custom-arrays/arrays.cpp)
 add_executable(dynamic-array dynamic-arrays/basic.cpp)
+target_compile_features(dynamic-array PRIVATE cxx_std_17)
+
+add_executable(iterators iterators/basic.cpp)
+target_compile_features(iterators PRIVATE cxx_std_17)
+
+add_executable(custom-iterators iterators/custom-iterators.cpp)
