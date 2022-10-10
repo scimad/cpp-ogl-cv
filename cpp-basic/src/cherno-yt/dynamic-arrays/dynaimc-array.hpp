@@ -51,6 +51,11 @@ public:
 
     ~DynamicArray(){
         std::cout<< "[~DynamicArray]: Calling destructor." << std::endl;
+
+        //while deleting Dynamic Array, free up memory reserved by its objects
+        for (size_t i=0; i<n;i++){
+            (*T_ptr[i]).~T();
+        }
         delete[] T_ptr;
     };
 
@@ -70,7 +75,19 @@ public:
             throw std::invalid_argument("Invalid index size");
     }
 
-    void push_back(const T value){
+    // void push_back(const T& value){
+    //     if (n == capacity){
+    //         // resize the array and copy to new place
+    //         this->resize((this->capacity+1)*3/2);
+    //     }
+    //     if (zr::custom_alloc_verbose == true)
+    //         std::cout << "[push_back]:Pushing back (at index " << n << ")." << std::endl;
+    //     //invoke move semantics
+    //     this->T_ptr[n] = new T(std::move(value)); //new T(value);
+    //     n++;
+    // }
+
+    void push_back(const T&& value){
         if (n == capacity){
             // resize the array and copy to new place
             this->resize((this->capacity+1)*3/2);
@@ -80,6 +97,16 @@ public:
         //invoke move semantics
         this->T_ptr[n] = new T(std::move(value)); //new T(value);
         n++;
+    }
+
+    void pop_back(){//T&& pop_back(){
+        if (n>0){
+            n--;
+            // return std::move(*T_ptr[n]);
+            (*T_ptr[n]).~T();
+        }else{
+            throw std::invalid_argument("Invalid index size");
+        }
     }
 
     size_t size() const {return n;}
