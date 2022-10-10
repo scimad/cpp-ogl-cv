@@ -6,7 +6,7 @@
 class myString{
     size_t len=0;
 public:
-    char* charBuf;// = new char[0];
+    char* charBuf = nullptr;
     myString(){
         std::cout << "[myString]: Creating..." << std::endl;
         len = 0;
@@ -35,6 +35,17 @@ public:
         std::cout << "[myString]: Deleting..." << std::endl;
         delete[] charBuf;
         len = 0;
+    }
+
+    myString& operator=(const myString& my_str){
+        delete[] charBuf;
+        len = my_str.len;
+        charBuf = new char[len+1];
+        for (size_t i=0; i<len; i++){
+            charBuf[i] = my_str.charBuf[i];
+        }
+        charBuf[len] = '\0';
+        return *this;
     }
 
     friend std::ostream& operator<<(std::ostream& os, const myString& my_str){
