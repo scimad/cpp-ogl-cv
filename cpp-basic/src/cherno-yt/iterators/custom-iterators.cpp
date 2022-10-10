@@ -38,5 +38,13 @@ int main(){
         std::cout << *it << std::endl;
     }
     std::cout << "----------" << std::endl;
+
+    DynamicArray<float> f_arr;
+    f_arr.push_back(10.3);
+    f_arr.push_back(3.1);
+
+    for (auto it = f_arr.begin(); it != f_arr.end();++it)
+        std::cout << *it << std::endl;
+
     return 0;
 }
