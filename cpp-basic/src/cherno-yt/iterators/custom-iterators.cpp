@@ -6,10 +6,11 @@
 
 int main(){
     zr::custom_alloc_verbose = false;
-    // DynamicArray<std::string> dyn_arr;
 
+    // typedef std::string T;
     typedef myString T;
-    DynamicArray<myString> dyn_arr;
+
+    DynamicArray<T> dyn_arr;
 
     dyn_arr.push_back("Madhav");
     dyn_arr.push_back("Humagain");
