@@ -54,13 +54,16 @@ int main() {
     return -1;
   }
   zr::log("Successfully initialized GLEW.");
+  zr::log("OpenGL Version: " + std::string((const char*) glGetString(GL_VERSION)));
+
 
   // Loading GLAD                                                 // Looks like GLAD is not required when GLEW is used! (Needs Verification)
   // if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress)) {
   //   zr::log("Failed to initialize GLAD", zr::VERBOSITY_LEVEL::ERROR);
   //   return -1;
   // }
-  zr::log("Successfully initialized GLAD window.");
+  // zr::log("Successfully initialized GLAD window.");
+
 
   while (!glfwWindowShouldClose(window)) {
     processInput(window);

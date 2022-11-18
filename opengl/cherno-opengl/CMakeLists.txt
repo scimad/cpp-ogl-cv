@@ -1,6 +1,12 @@
 project (opengl-cherno)
 cmake_minimum_required(VERSION 2.8.12)
 
+# link_directories (../lib/libstatic/)											#TODO: Need to add project lib instead of system library
+
+# For some reason cmake is not taking libraries from our project but taking from system. That needs fix but we will continue like this For
+# now.
+
+
 add_executable(windowing 01-windowing/windowing.cpp)
 add_executable(glew-test 02-glew-test/glew-test.cpp)
 
