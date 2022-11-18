@@ -21,4 +21,4 @@ endif()
 include_directories( ./lib/include ${glfw3_INCLUDE_DIRS})                                      # ${GLEW_INCLUDE_DIRS} ${OPENGL_INCLUDE_DIRS}
 
 add_subdirectory(cherno-opengl)
-add_subdirectory(learnopengl-tutorials)
+# add_subdirectory(learnopengl-tutorials)                                        # Refer to notes on: ./learnopengl-tutorials/CMakeLists.txt
