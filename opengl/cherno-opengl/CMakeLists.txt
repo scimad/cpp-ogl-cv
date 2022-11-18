@@ -2,10 +2,10 @@ project (opengl-cherno)
 cmake_minimum_required(VERSION 2.8.12)
 
 add_executable(windowing 01-windowing/windowing.cpp)
-# add_executable(glew-test 02-glew-test/glew-test.cpp)
+add_executable(glew-test 02-glew-test/glew-test.cpp)
 
 target_sources(windowing PRIVATE 01-windowing/windowing.cpp ../lib/src/glad.c ../lib/src/ZR/core.cpp)
 target_link_libraries(windowing ${OPENGL_LIBRARIES} ${glfw3_LINK_LIBRARIES} ${CMAKE_DL_LIBS})
 
-# target_sources(glew-test PRIVATE 01-glew-test/glew-test.cpp ../lib/src/glad.c ../lib/src/ZR/core.cpp)
-# target_link_libraries(glew-test ${OPENGL_LIBRARIES} ${glfw3_LINK_LIBRARIES} ${CMAKE_DL_LIBS})
+target_sources(glew-test PRIVATE 02-glew-test/glew-test.cpp ../lib/src/glad.c ../lib/src/ZR/core.cpp)
+target_link_libraries(glew-test ${OPENGL_LIBRARIES} ${glfw3_LINK_LIBRARIES} GLEW ${CMAKE_DL_LIBS})                  # ${GLEW_LINK_LIBRARIES}

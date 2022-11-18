@@ -1,6 +1,6 @@
-#include <glad/glad.h>
-
-#include <GLFW/glfw3.h>
+#include "GL/glew.h"
+// #include <glad/glad.h>                                         // Looks like GLAD is not required when GLEW is used! (Needs Verification)
+#include "GLFW/glfw3.h"
 
 #include <iostream>
 #include <string>
@@ -13,8 +13,9 @@ void processInput(GLFWwindow *window) {
 }
 
 int main() {
+  zr::log_level = zr::VERBOSITY_LEVEL::INFO;
   if (!glfwInit()) {
-    zr::log("GLFW initialization failed.");
+    zr::log("GLFW initialization failed.", zr::VERBOSITY_LEVEL::ERROR);
     return -1;
   }
   zr::log("Successfully initialized GLFW.");
@@ -27,7 +28,6 @@ int main() {
       glfwTerminate();
       return -1;
   }
-
     /* Make the window's context current */
     // glfwMakeContextCurrent(window);
 
@@ -37,17 +37,29 @@ int main() {
     {
 
   if (window == NULL) {
-    zr::log("Failed to create GLFW window.");
+    zr::log("Failed to create GLFW window.", zr::VERBOSITY_LEVEL::ERROR);
     glfwTerminate();
     return -1;
   }
   zr::log("Successfully created GLFW window.");
 
   glfwMakeContextCurrent(window);
-  if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress)) {
-    zr::log("Failed to initialize GLAD");
+
+  // Initialize GLEW
+  GLenum err = glewInit();                        //Must do after glfwMakeContextCurrent() or alternatively after properly initializing GLUT
+  if (GLEW_OK != err)
+  {
+    zr::log("Failed to initialize GLEW. Err: " + std::string((const char*)(glewGetErrorString(err))), zr::VERBOSITY_LEVEL::WARNING);
+    glfwTerminate();
     return -1;
   }
+  zr::log("Successfully initialized GLEW.");
+
+  // Loading GLAD                                                 // Looks like GLAD is not required when GLEW is used! (Needs Verification)
+  // if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress)) {
+  //   zr::log("Failed to initialize GLAD", zr::VERBOSITY_LEVEL::ERROR);
+  //   return -1;
+  // }
   zr::log("Successfully initialized GLAD window.");
 
   while (!glfwWindowShouldClose(window)) {
