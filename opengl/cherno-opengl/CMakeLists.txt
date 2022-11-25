@@ -9,8 +9,9 @@ cmake_minimum_required(VERSION 2.8.12)
 
 add_executable(windowing 01-windowing/windowing.cpp)
 add_executable(glew-test 02-glew-test/glew-test.cpp)
-add_executable(hello_world 03-modern-opengl-basic/hello_world.cpp)
-add_executable(vertex-buffer 03-modern-opengl-basic/vertex_buffer_and_triangle.cpp)
+add_executable(hello-world 03-modern-opengl-basic/hello_world.cpp)
+add_executable(vertex-buffer 03-modern-opengl-basic/vertex_buffer_and_shaders.cpp)
+add_executable(shaders-example 08-dealing-with-shaders/shaders_example.cpp)
 
 
 target_sources(windowing PRIVATE 01-windowing/windowing.cpp ../lib/src/glad.c ../lib/src/ZR/core.cpp)
@@ -19,8 +20,11 @@ target_link_libraries(windowing ${OPENGL_LIBRARIES} ${glfw3_LINK_LIBRARIES} ${CM
 target_sources(glew-test PRIVATE 02-glew-test/glew-test.cpp ../lib/src/glad.c ../lib/src/ZR/core.cpp)
 target_link_libraries(glew-test ${OPENGL_LIBRARIES} ${glfw3_LINK_LIBRARIES} GLEW ${CMAKE_DL_LIBS})                  # ${GLEW_LINK_LIBRARIES}
 
-target_sources(vertex-buffer PRIVATE 03-modern-opengl-basic/vertex_buffer_and_triangle.cpp ../lib/src/glad.c ../lib/src/ZR/core.cpp)
+target_sources(vertex-buffer PRIVATE 03-modern-opengl-basic/vertex_buffer_and_shaders.cpp ../lib/src/glad.c ../lib/src/ZR/core.cpp)
 target_link_libraries(vertex-buffer ${OPENGL_LIBRARIES} ${glfw3_LINK_LIBRARIES} GLEW ${CMAKE_DL_LIBS})                  # ${GLEW_LINK_LIBRARIES}
 
-target_sources(hello_world PRIVATE 03-modern-opengl-basic/hello_world.cpp ../lib/src/glad.c ../lib/src/ZR/core.cpp)
-target_link_libraries(hello_world ${OPENGL_LIBRARIES} ${glfw3_LINK_LIBRARIES} GLEW ${CMAKE_DL_LIBS})                  # ${GLEW_LINK_LIBRARIES}
+target_sources(hello-world PRIVATE 03-modern-opengl-basic/hello_world.cpp ../lib/src/glad.c ../lib/src/ZR/core.cpp)
+target_link_libraries(hello-world ${OPENGL_LIBRARIES} ${glfw3_LINK_LIBRARIES} GLEW ${CMAKE_DL_LIBS})                  # ${GLEW_LINK_LIBRARIES}
+
+target_sources(shaders-example PRIVATE 08-dealing-with-shaders/shaders_example.cpp ../lib/src/glad.c ../lib/src/ZR/core.cpp)
+target_link_libraries(shaders-example ${OPENGL_LIBRARIES} ${glfw3_LINK_LIBRARIES} GLEW ${CMAKE_DL_LIBS})                  # ${GLEW_LINK_LIBRARIES}
