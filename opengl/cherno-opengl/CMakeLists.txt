@@ -12,6 +12,7 @@ add_executable(glew-test 02-glew-test/glew-test.cpp)
 add_executable(hello-world 03-modern-opengl-basic/hello_world.cpp)
 add_executable(vertex-buffer 03-modern-opengl-basic/vertex_buffer_and_shaders.cpp)
 add_executable(shaders-example 08-dealing-with-shaders/shaders_example.cpp)
+add_executable(index-buffers 09-index-buffers/index_buffers.cpp)
 
 
 target_sources(windowing PRIVATE 01-windowing/windowing.cpp ../lib/src/glad.c ../lib/src/ZR/core.cpp)
@@ -28,3 +29,6 @@ target_link_libraries(hello-world ${OPENGL_LIBRARIES} ${glfw3_LINK_LIBRARIES} GL
 
 target_sources(shaders-example PRIVATE 08-dealing-with-shaders/shaders_example.cpp ../lib/src/glad.c ../lib/src/ZR/core.cpp)
 target_link_libraries(shaders-example ${OPENGL_LIBRARIES} ${glfw3_LINK_LIBRARIES} GLEW ${CMAKE_DL_LIBS})                  # ${GLEW_LINK_LIBRARIES}
+
+target_sources(index-buffers PRIVATE 09-index-buffers/index_buffers.cpp ../lib/src/glad.c ../lib/src/ZR/core.cpp)
+target_link_libraries(index-buffers ${OPENGL_LIBRARIES} ${glfw3_LINK_LIBRARIES} GLEW ${CMAKE_DL_LIBS})                  # ${GLEW_LINK_LIBRARIES}
