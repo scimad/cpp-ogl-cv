@@ -151,7 +151,7 @@ int main() {
     glBufferData(GL_ELEMENT_ARRAY_BUFFER, 6 * sizeof(GLuint), index_data, GL_STATIC_DRAW);
 
     // The path of the is with respect to ZR/opengl/build/.
-    ShaderProgramSource source = parseShader("../cherno-opengl/08-dealing-with-shaders/res/basic.shader");
+    ShaderProgramSource source = parseShader("../cherno-opengl/09-index-buffers/res/basic.shader");
 
     GLuint shader = createShader(source.vertexSource, source.fragmentSource);
     glUseProgram(shader);
