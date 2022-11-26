@@ -15,6 +15,7 @@ add_executable(shaders-example 08-dealing-with-shaders/shaders_example.cpp)
 add_executable(index-buffers 09-index-buffers/index_buffers.cpp)
 add_executable(gl-get-errors 10-opengl-errors/main.cpp)
 add_executable(uniforms 11-uniforms/main.cpp)
+add_executable(vertex-arrays 12-vertex-arrays/main.cpp)
 
 
 target_sources(windowing PRIVATE 01-windowing/windowing.cpp ../lib/src/glad.c ../lib/src/ZR/core.cpp)
@@ -40,3 +41,6 @@ target_link_libraries(gl-get-errors ${OPENGL_LIBRARIES} ${glfw3_LINK_LIBRARIES} 
 
 target_sources(uniforms PRIVATE 11-uniforms/main.cpp ../lib/src/glad.c ../lib/src/ZR/core.cpp)
 target_link_libraries(uniforms ${OPENGL_LIBRARIES} ${glfw3_LINK_LIBRARIES} GLEW ${CMAKE_DL_LIBS})                  # ${GLEW_LINK_LIBRARIES}
+
+target_sources(vertex-arrays PRIVATE 12-vertex-arrays/main.cpp ../lib/src/glad.c ../lib/src/ZR/core.cpp)
+target_link_libraries(vertex-arrays ${OPENGL_LIBRARIES} ${glfw3_LINK_LIBRARIES} GLEW ${CMAKE_DL_LIBS})                  # ${GLEW_LINK_LIBRARIES}
