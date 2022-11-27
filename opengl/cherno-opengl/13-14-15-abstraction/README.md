@@ -1,0 +1,2 @@
+# Notes for Abstraction Example:
+

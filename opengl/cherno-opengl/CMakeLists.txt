@@ -44,3 +44,6 @@ target_link_libraries(uniforms ${OPENGL_LIBRARIES} ${glfw3_LINK_LIBRARIES} GLEW 
 
 target_sources(vertex-arrays PRIVATE 12-vertex-arrays/main.cpp ../lib/src/glad.c ../lib/src/ZR/core.cpp)
 target_link_libraries(vertex-arrays ${OPENGL_LIBRARIES} ${glfw3_LINK_LIBRARIES} GLEW ${CMAKE_DL_LIBS})                  # ${GLEW_LINK_LIBRARIES}
+
+# Now using separate CMakeLists for each sub-project
+add_subdirectory(13-14-15-abstraction)

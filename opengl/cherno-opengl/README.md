@@ -21,7 +21,7 @@
 * Ways to move data from CPU to GPU.
 * Uniforms are set 'per draw call'.
 
-# Using Vertex Array
+## Using Vertex Array
 * The information about the layout (or attributes) of currently bind vertex data/buffer (via vertex buffer object) is stored using a vertex 
 array mechanism. So, if we need to use a different layout, then we need to specify a different vertex buffer object.
 * Binding the vertex array is equivalent to *binding the vertex buffer + setting out the layout*.
@@ -41,3 +41,6 @@ array mechanism. So, if we need to use a different layout, then we need to speci
 * A vertex array object is created by default (so, a default VAO is bind to the current state.)in compatibility profile in OpenGL but not in
  core profile.
  
+
+## Renderer:
+* Takes a command and perform all related calls required for draw
