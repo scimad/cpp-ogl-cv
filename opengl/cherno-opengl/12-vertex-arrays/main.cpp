@@ -77,7 +77,7 @@ static int compileShader(GLenum shader_type, const std::string& shader_program){
     glGetShaderiv(shader_handle, GL_COMPILE_STATUS, &result);
 
     if (result == GL_FALSE){
-        zr::log(std::string("Failed to compile") + (shader_type == GL_VERTEX_SHADER ? "vertex" : "fragment") + " shader.", zr::VERBOSITY_LEVEL::ERROR);
+        zr::log(std::string("Failed to compile ") + (shader_type == GL_VERTEX_SHADER ? "vertex" : "fragment") + " shader.", zr::VERBOSITY_LEVEL::ERROR);
         int length;
         glGetShaderiv(shader_handle, GL_INFO_LOG_LENGTH, &length);
         char* err_msg = (char*) alloca(length * sizeof(char));    //Dynamic size char array allocation on stack using alloca()
