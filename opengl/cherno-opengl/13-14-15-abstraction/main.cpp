@@ -88,7 +88,7 @@ void processInput(GLFWwindow *window) {
 }
 
 int main() {
-    zr::log_level = zr::VERBOSITY_LEVEL::INFO;
+    zr::log_level = zr::VERBOSITY_LEVEL::DEBUG;
     if (!glfwInit()){
         zr::log("GLFW initialization failed.", zr::VERBOSITY_LEVEL::ERROR);
         return -1;
@@ -96,11 +96,11 @@ int main() {
     zr::log("Successfully initialized GLFW.");
 
     // Choose OpenGL version and setup either compatibility profile or core profile 
-    glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
-    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 6);
-    glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+    GLCALL(glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4));
+    GLCALL(glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 6));
+    GLCALL(glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE));      // glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_COMPAT_PROFILE);
 
-    GLFWwindow *window = glfwCreateWindow(800, 600, "ZR :: Cherno-OpenGL", NULL, NULL);
+    GLCALL(GLFWwindow *window = glfwCreateWindow(800, 600, "ZR :: Cherno-OpenGL", NULL, NULL));
 
     if (!window){
         zr::log("Failed to create GLFW window.", zr::VERBOSITY_LEVEL::ERROR);
@@ -207,6 +207,6 @@ int main() {
         glfwPollEvents();
     }
     glDeleteProgram(shader);
-    glfwTerminate();
+    glfwTerminate(); // Refer to the notes on README.md of this project   
     return 0;
 }

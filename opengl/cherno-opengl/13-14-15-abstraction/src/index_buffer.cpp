@@ -1,6 +1,7 @@
 #include "index_buffer.hpp"
 
 #include "renderer.hpp"
+#include <ZR/core.hpp>
 
 IndexBuffer::IndexBuffer(const unsigned int* data, GLuint count):count(count){
     GLCALL(glGenBuffers(1, &rendererID));
@@ -10,6 +11,7 @@ IndexBuffer::IndexBuffer(const unsigned int* data, GLuint count):count(count){
 };
 IndexBuffer::~IndexBuffer(){
     GLCALL(glDeleteBuffers(1, &rendererID));
+    zr::log("Destroying index buffer object");
 };
 void IndexBuffer::bind() const {
     GLCALL(glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, rendererID));
