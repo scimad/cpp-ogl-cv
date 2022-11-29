@@ -97,7 +97,7 @@ int main() {
 
     // Choose OpenGL version and setup either compatibility profile or core profile 
     GLCALL(glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4));
-    GLCALL(glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 6));
+    GLCALL(glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3));
     GLCALL(glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE));      // glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_COMPAT_PROFILE);
 
     GLCALL(GLFWwindow *window = glfwCreateWindow(800, 600, "ZR :: Cherno-OpenGL", NULL, NULL));
