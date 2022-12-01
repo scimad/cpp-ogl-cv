@@ -32,17 +32,25 @@ void Shader::unbind(){
     GLCALL(glUseProgram(0));
 };
 
+void Shader::setUniform1f(const std::string& uni_name, float value){
+    int location = getUniformLocation(uni_name);
+    GLCALL(glUniform1f(location, value));
+};
+
 void Shader::setUniform4f(const std::string& uni_name, float v0, float v1, float v2, float v3){
     int location = getUniformLocation(uni_name);
     GLCALL(glUniform4f(location, v0, v1, v2, v3));
 };
 
 int Shader::getUniformLocation(const std::string& uni_name){
-    int location = glGetUniformLocation(rendererID, uni_name.c_str());
-    // GLCALL(int location = glGetUniformLocation(rendererID, uni_name.c_str()));
+    if (uniformrLocationCache.find(uni_name) != uniformrLocationCache.end()){
+        return uniformrLocationCache[uni_name];
+    }
+    GLCALL(int location = glGetUniformLocation(rendererID, uni_name.c_str()));
     if (location == -1){
         zr::log("Uniform: " + uni_name + " doesn't exist.",zr::VERBOSITY_LEVEL::WARNING);
     }
+    uniformrLocationCache[uni_name] = location;
     return location;
 };
 
