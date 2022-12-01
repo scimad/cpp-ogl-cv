@@ -21,5 +21,13 @@ if(${glfw3_FOUND})
 endif()
 
 include_directories( ../../lib/include ${OPENGL_INCLUDE_DIRS}  ${glfw3_INCLUDE_DIRS})                                 # ${GLEW_INCLUDE_DIRS}
-target_sources(abstraction PRIVATE main.cpp src/renderer.cpp src/vertex_buffer.cpp src/index_buffer.cpp ../../lib/src/glad.c ../../lib/src/ZR/core.cpp)
+target_sources(abstraction PRIVATE  main.cpp src/renderer.cpp
+    src/vertex_buffer.cpp
+    src/index_buffer.cpp
+    ../../lib/src/glad.c
+    ../../lib/src/ZR/core.cpp
+    src/vertex_array.cpp
+    src/vertex_buffer_layout.cpp
+    
+)
 target_link_libraries(abstraction ${OPENGL_LIBRARIES} ${glfw3_LINK_LIBRARIES} GLEW ${CMAKE_DL_LIBS})                # ${GLEW_LINK_LIBRARIES}

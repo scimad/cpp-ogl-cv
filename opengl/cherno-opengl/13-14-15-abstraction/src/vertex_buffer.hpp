@@ -1,5 +1,5 @@
-#ifndef __VERTEX_BUFFER__
-#define __VERTEX_BUFFER__
+#ifndef __VERTEX_BUFFER
+#define __VERTEX_BUFFER
 
 class VertexBuffer
 {
@@ -8,11 +8,11 @@ private:
 public:
     VertexBuffer(const void* data, unsigned int size);
     ~VertexBuffer();
-    void bind();
-    void unbind();
+    void bind() const;
+    void unbind() const;
 };
 
 
 
 
-#endif //__VERTEX_BUFFER__
+#endif //__VERTEX_BUFFER

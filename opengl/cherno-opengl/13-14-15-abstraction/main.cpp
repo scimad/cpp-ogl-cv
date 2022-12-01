@@ -1,6 +1,7 @@
 #include "src/renderer.hpp"                                         // Load glew before everything (via renderer)
 #include "src/vertex_buffer.hpp"
 #include "src/index_buffer.hpp"
+#include "src/vertex_array.hpp"
 
 #include "GLFW/glfw3.h"
 
@@ -131,7 +132,6 @@ int main() {
     // }
     // zr::log("Successfully initialized GLAD window.");
 
-    glfwMakeContextCurrent(window);
     glClearColor(0.2, 0.2, 0.2, 0.0);
 
     // Create new vertex buffer
@@ -147,18 +147,28 @@ int main() {
         2, 3, 0
     };
 
-    //Generating at least one VAO is compulsory in core profile but a default one is available in compatibility profile
-    unsigned int vao;
-    glGenVertexArrays(1, &vao);
-    glBindVertexArray(vao);
+    // Creating va, vb, layout using abstraction
 
-    // Creating vb using abstraction
+    VertexArray va;
     VertexBuffer vb(vertex_data, 4 * 2 * sizeof(float));
+    VertexBufferLayout layout;
+
+
+    // ------------------------------GLCALL IS WORKING-----------------------
 
     // Need to tell the layout of the buffer [Explanation is here: https://youtu.be/x0H--CL2tUI?list=PLlrATfBNZ98foTJPJ_Ev03o2oq3-GGOS2&t=800]
     GLCALL(glEnableVertexAttribArray(0));
     GLCALL(glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 2 * sizeof(float), (void*) 0));
 
+
+    // ------------------------------LAYOUT IS NOT WORKING-----------------------
+    // layout.push<float>(2);
+    // va.addLayout(layout);
+    // va.addBuffer(vb, layout);
+
+
+
+    
     // Creating ibo
     IndexBuffer ib(index_data, 6);
 
@@ -197,8 +207,8 @@ int main() {
         GLCALL(glUseProgram(shader));
         GLCALL(glUniform4f(location, r, 0.2, 0.5, 0.0));
         
-        GLCALL(glBindVertexArray(vao));
-        // ib.bind();
+        va.bind();
+        ib.bind();
 
         GLCALL(glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, nullptr));
     
