@@ -151,7 +151,7 @@ int main() {
     // }
     // zr::log("Successfully initialized GLAD window.");
 
-    glfwMakeContextCurrent(window);
+    // glfwMakeContextCurrent(window);
     glClearColor(0.2, 0.2, 0.2, 0.0);
 
     // Create new vertex buffer
@@ -168,7 +168,7 @@ int main() {
     };
 
     //Generating at least one VAO is compulsory in core profile but a default one is available in compatibility profile
-    unsigned int vao;
+    GLuint int vao;
     glGenVertexArrays(1, &vao);
     glBindVertexArray(vao);
 
