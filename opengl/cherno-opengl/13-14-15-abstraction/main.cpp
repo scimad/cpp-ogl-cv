@@ -159,7 +159,6 @@ int main() {
     // ------------------------------LAYOUT IS NOT WORKING-----------------------
     VertexBufferLayout layout;
     layout.push<float>(2);
-    // va.addLayout(layout);
     va.addBuffer(vb, layout);
 
     // Creating ibo
@@ -177,8 +176,8 @@ int main() {
     GLCALL(glUniform4f(location, 0.0, 0.2, 0.5, 0.0));
 
     //If we have multiple vertex buffer objects and layouts to be bind within the loop, then:
-
-    // Unbind everything
+    // Unbind everything here and bind the buffers individually that are to be rendered 
+    // depending on the program logic
     GLunbindShaderVertexIndexBuffer();
 
     // Utility variables
@@ -200,6 +199,8 @@ int main() {
         GLCALL(glUseProgram(shader));
         GLCALL(glUniform4f(location, r, 0.2, 0.5, 0.0));
         
+        // Bind things that needs to be rendered here.
+        // There might be multiple instances of these to be bind and rendered
         va.bind();
         ib.bind();
 
