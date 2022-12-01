@@ -2,6 +2,7 @@
 #include "src/vertex_buffer.hpp"
 #include "src/index_buffer.hpp"
 #include "src/vertex_array.hpp"
+#include "src/shader.hpp"
 
 #include "GLFW/glfw3.h"
 
@@ -9,18 +10,7 @@
 
 #include <signal.h>
 #include <string>
-#include <fstream>
-#include <sstream>
 
-
-struct ShaderProgramSource{
-    std::string vertexSource;
-    std::string fragmentSource;
-};
-
-enum class ShaderType{
-    NONE = -1, VERTEX = 0, FRAGMENT = 1
-};
 
 static void GLunbindShaderVertexIndexBuffer(){
     GLCALL(glBindVertexArray(0));
@@ -28,60 +18,6 @@ static void GLunbindShaderVertexIndexBuffer(){
     GLCALL(glBindBuffer(GL_ARRAY_BUFFER, 0));
     GLCALL(glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0));
 };
-
-static ShaderProgramSource parseShader(const std::string& file){
-    std::ifstream stream(file);
-    std::string line;
-    std::stringstream ss[2];
-    ShaderType shader_type = ShaderType::NONE;
-    while (getline(stream, line)){
-        if (line.find("#shader") != std::string::npos){
-            if (line.find("vertex") != std::string::npos){
-                shader_type = ShaderType::VERTEX;
-            }else if (line.find("fragment") != std::string::npos){
-                shader_type = ShaderType::FRAGMENT;
-            }
-        }else{
-            ss[(int) shader_type] << line << "\n";
-        }
-    }
-    return {ss[0].str(), ss[1].str()};
-}
-
-static int compileShader(GLenum shader_type, const std::string& shader_program){
-    GLuint shader_handle = glCreateShader(shader_type);
-    const char* shader_src = shader_program.c_str();
-    glShaderSource(shader_handle, 1, &shader_src, NULL);
-    glCompileShader(shader_handle);
-
-    GLint result;
-    glGetShaderiv(shader_handle, GL_COMPILE_STATUS, &result);
-
-    if (result == GL_FALSE){
-        zr::log(std::string("Failed to compile ") + (shader_type == GL_VERTEX_SHADER ? "vertex" : "fragment") + " shader.", zr::VERBOSITY_LEVEL::ERROR);
-        int length;
-        glGetShaderiv(shader_handle, GL_INFO_LOG_LENGTH, &length);
-        char* err_msg = (char*) alloca(length * sizeof(char));    //Dynamic size char array allocation on stack using alloca()
-        glGetShaderInfoLog(shader_handle, length, &length, err_msg);
-        zr::log(std::string(err_msg), zr::VERBOSITY_LEVEL::ERROR);
-    }
-    return shader_handle;
-}
-
-static int createShader(const std::string& vert_shader, const std::string& frag_shader){
-    GLuint program_handle = glCreateProgram();
-    GLuint vs_handle = compileShader(GL_VERTEX_SHADER, vert_shader);
-    GLuint fs_handle = compileShader(GL_FRAGMENT_SHADER, frag_shader);
-
-    glAttachShader(program_handle, vs_handle);
-    glAttachShader(program_handle, fs_handle);
-    glLinkProgram(program_handle);
-    glValidateProgram(program_handle);
-
-    glDeleteShader(vs_handle);
-    glDeleteShader(fs_handle);
-    return program_handle;
-}
 
 void processInput(GLFWwindow *window) {
     if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
@@ -165,20 +101,17 @@ int main() {
     IndexBuffer ib(index_data, 6);
 
     // The path of the is with respect to ZR/opengl/build/.
-    ShaderProgramSource source = parseShader("../res/basic.shader");
-
-    GLuint shader = createShader(source.vertexSource, source.fragmentSource);
-    //Binding a shader
-    GLCALL(glUseProgram(shader));
-
-    int location = glGetUniformLocation(shader, "u_Color");
-    ASSERT(location != -1);
-    GLCALL(glUniform4f(location, 0.0, 0.2, 0.5, 0.0));
+    Shader shader("../res/basic.shader");
+    shader.bind();
+    shader.setUniform4f("u_color", 0.0, 0.2, 0.5, 0.0);
 
     //If we have multiple vertex buffer objects and layouts to be bind within the loop, then:
     // Unbind everything here and bind the buffers individually that are to be rendered 
     // depending on the program logic
-    GLunbindShaderVertexIndexBuffer();
+    va.unbind();
+    vb.unbind();
+    ib.unbind();
+    shader.unbind();
 
     // Utility variables
     static bool exit_flag = false;
@@ -196,8 +129,8 @@ int main() {
         /* Render here */
         glClear(GL_COLOR_BUFFER_BIT);
 
-        GLCALL(glUseProgram(shader));
-        GLCALL(glUniform4f(location, r, 0.2, 0.5, 0.0));
+        shader.bind();
+        shader.setUniform4f("u_color", r, 0.2, 0.5, 0.0);
         
         // Bind things that needs to be rendered here.
         // There might be multiple instances of these to be bind and rendered
@@ -210,7 +143,6 @@ int main() {
         glfwSwapBuffers(window);
         glfwPollEvents();
     }
-    glDeleteProgram(shader);
     glfwTerminate(); // Refer to the notes on README.md of this project   
     return 0;
 }
