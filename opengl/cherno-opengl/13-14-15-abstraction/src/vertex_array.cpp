@@ -10,12 +10,12 @@ VertexArray::VertexArray(){
     // glGenVertexArrays(1, &vao);
     // glBindVertexArray(vao);
 
-    GLCALL(glGenVertexArrays(1, &rendereID));
-    GLCALL(glBindVertexArray(rendereID));
+    GLCALL(glGenVertexArrays(1, &rendererID));
+    GLCALL(glBindVertexArray(rendererID));
 
 };
 VertexArray::~VertexArray(){
-    GLCALL(glDeleteVertexArrays(1, &rendereID));
+    GLCALL(glDeleteVertexArrays(1, &rendererID));
 };
 void VertexArray::addBuffer(const VertexBuffer& vb, const VertexBufferLayout& layout){
     bind();
@@ -36,7 +36,7 @@ void VertexArray::addBuffer(const VertexBuffer& vb, const VertexBufferLayout& la
 };
 void VertexArray::addLayout(VertexBufferLayout layout){};
 void VertexArray::bind()const{
-    GLCALL(glBindVertexArray(rendereID));
+    GLCALL(glBindVertexArray(rendererID));
 };
 void VertexArray::unbind()const{
     GLCALL(glBindVertexArray(0));

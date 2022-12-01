@@ -151,24 +151,17 @@ int main() {
 
     VertexArray va;
     VertexBuffer vb(vertex_data, 4 * 2 * sizeof(float));
-    VertexBufferLayout layout;
-
 
     // ------------------------------GLCALL IS WORKING-----------------------
 
     // Need to tell the layout of the buffer [Explanation is here: https://youtu.be/x0H--CL2tUI?list=PLlrATfBNZ98foTJPJ_Ev03o2oq3-GGOS2&t=800]
-    GLCALL(glEnableVertexAttribArray(0));
-    GLCALL(glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 2 * sizeof(float), (void*) 0));
-
 
     // ------------------------------LAYOUT IS NOT WORKING-----------------------
-    // layout.push<float>(2);
+    VertexBufferLayout layout;
+    layout.push<float>(2);
     // va.addLayout(layout);
-    // va.addBuffer(vb, layout);
+    va.addBuffer(vb, layout);
 
-
-
-    
     // Creating ibo
     IndexBuffer ib(index_data, 6);
 
