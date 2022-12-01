@@ -168,7 +168,7 @@ int main() {
     };
 
     //Generating at least one VAO is compulsory in core profile but a default one is available in compatibility profile
-    GLuint int vao;
+    GLuint vao;
     glGenVertexArrays(1, &vao);
     glBindVertexArray(vao);
 
