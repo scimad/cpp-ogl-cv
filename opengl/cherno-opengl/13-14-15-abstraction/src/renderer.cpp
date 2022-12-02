@@ -1,4 +1,6 @@
 #include <ZR/core.hpp>
+
+#include <GL/glew.h>
 #include "renderer.hpp"
 
 
@@ -15,3 +17,14 @@ bool GLIsErrorFree(const char* function, const char* file, int line){
     }
     return is_error_free;
 }
+
+void Renderer::clear() const{
+    GLCALL(glClear(GL_COLOR_BUFFER_BIT));
+}
+void Renderer::draw(const VertexArray& va, const IndexBuffer& ib, const Shader& shader) const{
+        clear();
+        shader.bind();
+        va.bind();
+        ib.bind();
+        GLCALL(glDrawElements(GL_TRIANGLES, ib.getCount(), GL_UNSIGNED_INT, nullptr));
+};

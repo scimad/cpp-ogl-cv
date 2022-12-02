@@ -113,6 +113,8 @@ int main() {
     ib.unbind();
     shader.unbind();
 
+    Renderer renderer;
+
     // Utility variables
     static bool exit_flag = false;
     float r = 0.0f;
@@ -127,18 +129,14 @@ int main() {
         processInput(window);
     
         /* Render here */
-        glClear(GL_COLOR_BUFFER_BIT);
 
+
+        // Following shader binding is actually refactored / solved using Materials
         shader.bind();
         shader.setUniform4f("u_color", r, 0.2, 0.5, 0.0);
-        
-        // Bind things that needs to be rendered here.
-        // There might be multiple instances of these to be bind and rendered
-        va.bind();
-        ib.bind();
 
-        GLCALL(glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, nullptr));
-    
+        renderer.draw(va, ib, shader);
+
         /* Swap front and back buffers */
         glfwSwapBuffers(window);
         glfwPollEvents();

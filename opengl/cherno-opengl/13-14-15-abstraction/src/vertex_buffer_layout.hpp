@@ -5,9 +5,6 @@
 
 #include<vector>
 
-#include "renderer.hpp"
-
-
 struct VertexBufferElement
 {
     unsigned int count;
@@ -24,7 +21,7 @@ struct VertexBufferElement
             case GL_UNSIGNED_INT: return sizeof(GLuint);
             case GL_UNSIGNED_BYTE: return sizeof(GLchar);
         }
-        ASSERT(false);
+        // ASSERT(false);
         return 0;
     }
 };

@@ -21,7 +21,7 @@ Shader::~Shader(){
     GLCALL(glDeleteProgram(rendererID));
 };
 
-void Shader::bind(){
+void Shader::bind() const {
     //Binding a shader
     GLCALL(glUseProgram(rendererID));
 

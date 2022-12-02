@@ -1,11 +1,13 @@
 #ifndef __RENDERER
 #define __RENDERER
 
-
-
 #include <signal.h>
 
 #include "GL/glew.h"
+
+#include "vertex_array.hpp"
+#include "index_buffer.hpp"
+#include "shader.hpp"
 
 #define ASSERT(x) if (!(x)) raise(SIGTRAP);
 
@@ -17,5 +19,10 @@
 void GLClearError();
 bool GLIsErrorFree(const char* function, const char* file, int line);
 
+class Renderer{
+public:
+    void draw(const VertexArray& va, const IndexBuffer& ib, const Shader& shader) const;
+    void clear() const;
+};
 
 #endif

@@ -21,7 +21,8 @@ if(${glfw3_FOUND})
 endif()
 
 include_directories( ../../lib/include ${OPENGL_INCLUDE_DIRS}  ${glfw3_INCLUDE_DIRS})                                 # ${GLEW_INCLUDE_DIRS}
-target_sources(abstraction PRIVATE  main.cpp src/renderer.cpp
+target_sources(abstraction PRIVATE  main.cpp 
+    src/renderer.cpp
     src/vertex_buffer.cpp
     src/index_buffer.cpp
     ../../lib/src/glad.c

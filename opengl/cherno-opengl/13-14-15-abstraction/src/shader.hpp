@@ -23,7 +23,7 @@ public:
 
     unsigned int getRendererID(){return rendererID;}
 
-    void bind();
+    void bind() const;
     void unbind();
 
     //Set uniforms
