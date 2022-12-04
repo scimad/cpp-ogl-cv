@@ -3,6 +3,7 @@
 #include "src/index_buffer.hpp"
 #include "src/vertex_array.hpp"
 #include "src/shader.hpp"
+#include "src/texture.hpp"
 
 #include "GLFW/glfw3.h"
 
@@ -72,10 +73,10 @@ int main() {
 
     // Create new vertex buffer
     float vertex_data[] = {
-     0.0,  0.0,
-     0.5,  0.0,
-     0.5,  0.5,
-     0.0,  0.5
+     0.0,  0.0, 0.0, 0.0,
+     0.5,  0.0, 1.0, 0.0,
+     0.5,  0.5, 1.0, 1.0,
+     0.0,  0.5, 0.0, 1.0
     };
 
     unsigned int index_data[] = {
@@ -83,10 +84,14 @@ int main() {
         2, 3, 0
     };
 
+    // This gives transparency to transparent regions of pngs
+    GLCALL(glEnable(GL_BLEND));
+    GLCALL(glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA));
+
     // Creating va, vb, layout using abstraction
 
     VertexArray va;
-    VertexBuffer vb(vertex_data, 4 * 2 * sizeof(float));
+    VertexBuffer vb(vertex_data, 4 * 4 * sizeof(float)); //4 vertices, 4 float data per vertices 
 
     // ------------------------------GLCALL IS WORKING-----------------------
 
@@ -94,7 +99,8 @@ int main() {
 
     // ------------------------------LAYOUT IS NOT WORKING-----------------------
     VertexBufferLayout layout;
-    layout.push<float>(2);
+    layout.push<float>(2); //for x, y
+    layout.push<float>(2); //for texture u, v
     va.addBuffer(vb, layout);
 
     // Creating ibo
@@ -104,6 +110,13 @@ int main() {
     Shader shader("../res/basic.shader");
     shader.bind();
     shader.setUniform4f("u_color", 0.0, 0.2, 0.5, 0.0);
+
+    Texture texture("../res/chess/Chess_qlt45.svg.png");                          //https://commons.wikimedia.org/wiki/Category:SVG_chess_pieces
+    texture.bind();
+    shader.setUniform1i("u_texture", 0);
+ 
+
+
 
     //If we have multiple vertex buffer objects and layouts to be bind within the loop, then:
     // Unbind everything here and bind the buffers individually that are to be rendered 
@@ -130,10 +143,9 @@ int main() {
     
         /* Render here */
 
-
         // Following shader binding is actually refactored / solved using Materials
         shader.bind();
-        shader.setUniform4f("u_color", r, 0.2, 0.5, 0.0);
+        shader.setUniform4f("u_color", r, 0.2, 0.5, 0.0); //if uniform is not used in shader, it gives error / notification
 
         renderer.draw(va, ib, shader);
 
