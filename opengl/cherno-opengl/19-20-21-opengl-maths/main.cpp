@@ -101,9 +101,9 @@ int main() {
     // glm::mat4 proj = glm::ortho(-1.0, 1.0, -1.0, 1.0, -1.0, 1.0); // This seems to be default(?)
     glm::mat4 proj = glm::ortho(0.0, 960.0, 0.0, 540.0, -1.0, 1.0);
     glm::mat4 view = glm::translate(glm::mat4(1.0), glm::vec3(-100.0, 0.0, 0.0));
-    glm::mat4 model = glm::translate(glm::mat4(1.0), glm::vec3(200, 200, 0));
+    // glm::mat4 model = glm::translate(glm::mat4(1.0), glm::vec3(200, 200, 0));
 
-    glm::mat4 mvp = proj * view * model;
+    // glm::mat4 mvp = proj * view * model;
 
     // Creating ibo
     IndexBuffer ib(index_data, 6);
@@ -112,7 +112,7 @@ int main() {
     Shader shader("../res/basic.shader");
     shader.bind();
     shader.setUniform4f("u_color", 0.0, 0.2, 0.5, 0.0);
-    shader.setUniformMat4f("u_MVP", mvp);
+    // shader.setUniformMat4f("u_MVP", mvp);
 
     Texture texture("../../../assets/chess/Chess_qlt45.svg.png");                          //https://commons.wikimedia.org/wiki/Category:SVG_chess_pieces
     texture.bind();
@@ -153,6 +153,8 @@ int main() {
     float r = 0.0f;
     float increament = 0.03f;
 
+    glm::vec3 translation(200, 200, 0);
+
     /* Loop until the user closes the window */
     while (!exit_flag){
         r += increament;
@@ -166,6 +168,14 @@ int main() {
         ImGui_ImplOpenGL3_NewFrame();
         ImGui_ImplGlfw_NewFrame();
         ImGui::NewFrame();
+
+
+        glm::mat4 model = glm::translate(glm::mat4(1.0), translation);
+
+        glm::mat4 mvp = proj * view * model;
+
+
+
 
         if (show_demo_window)
             ImGui::ShowDemoWindow(&show_demo_window);
@@ -181,7 +191,7 @@ int main() {
             ImGui::Checkbox("Demo Window", &show_demo_window);      // Edit bools storing our window open/close state
             ImGui::Checkbox("Another Window", &show_another_window);
 
-            ImGui::SliderFloat("float", &f, 0.0f, 1.0f);            // Edit 1 float using a slider from 0.0f to 1.0f
+            ImGui::SliderFloat3("Translation", &translation.x, 0.0f, 960.0f);            // Edit 3 float using a slider from 0.0f to 960f
             ImGui::ColorEdit3("clear color", (float*)&clear_color); // Edit 3 floats representing a color
 
             if (ImGui::Button("Button"))                            // Buttons return true when clicked (most widgets return true when edited/activated)
@@ -205,6 +215,7 @@ int main() {
 
         // Following shader binding is actually refactored / solved using Materials
         shader.bind();
+        shader.setUniformMat4f("u_MVP", mvp);
         shader.setUniform4f("u_color", r, 0.2, 0.5, 0.0); //if uniform is not used in shader, it gives error / notification
 
         renderer.draw(va, ib, shader);
