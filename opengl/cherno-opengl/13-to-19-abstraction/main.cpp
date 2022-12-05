@@ -113,7 +113,7 @@ int main() {
     shader.setUniform4f("u_color", 0.0, 0.2, 0.5, 0.0);
     shader.setUniformMat4f("u_MVP", proj);
 
-    Texture texture("../res/chess/Chess_qlt45.svg.png");                          //https://commons.wikimedia.org/wiki/Category:SVG_chess_pieces
+    Texture texture("../../../assets/chess/Chess_qlt45.svg.png");                          //https://commons.wikimedia.org/wiki/Category:SVG_chess_pieces
     texture.bind();
     shader.setUniform1i("u_texture", 0);
  
