@@ -93,11 +93,7 @@ int main() {
     VertexArray va;
     VertexBuffer vb(vertex_data, 4 * 4 * sizeof(float)); //4 vertices, 4 float data per vertices 
 
-    // ------------------------------GLCALL IS WORKING-----------------------
-
     // Need to tell the layout of the buffer [Explanation is here: https://youtu.be/x0H--CL2tUI?list=PLlrATfBNZ98foTJPJ_Ev03o2oq3-GGOS2&t=800]
-
-    // ------------------------------LAYOUT IS NOT WORKING-----------------------
     VertexBufferLayout layout;
     layout.push<float>(2); //for x, y
     layout.push<float>(2); //for texture u, v
