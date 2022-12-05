@@ -6,6 +6,8 @@
 #include "src/texture.hpp"
 
 #include "GLFW/glfw3.h"
+#include "glm/glm.hpp"
+#include "glm/gtc/matrix_transform.hpp"
 
 #include <ZR/core.hpp>
 
@@ -99,6 +101,9 @@ int main() {
     layout.push<float>(2); //for texture u, v
     va.addBuffer(vb, layout);
 
+    // glm::mat4 proj = glm::ortho(-1.0, 1.0, -1.0, 1.0, -1.0, 1.0); // This seems to be default(?)
+    glm::mat4 proj = glm::ortho(-2.0, 2.0, -1.5, 1.5, -1.0, 1.0);
+
     // Creating ibo
     IndexBuffer ib(index_data, 6);
 
@@ -106,6 +111,7 @@ int main() {
     Shader shader("../res/basic.shader");
     shader.bind();
     shader.setUniform4f("u_color", 0.0, 0.2, 0.5, 0.0);
+    shader.setUniformMat4f("u_MVP", proj);
 
     Texture texture("../res/chess/Chess_qlt45.svg.png");                          //https://commons.wikimedia.org/wiki/Category:SVG_chess_pieces
     texture.bind();

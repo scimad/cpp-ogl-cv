@@ -2,10 +2,13 @@
 #version 330 core
 layout(location = 0) in vec4 position;		//taking in from vertex buffer
 layout(location = 1) in vec2 texture_uv;		//taking in from vertex buffer
+
 out vec2 v_texture_uv;
 
+uniform mat4 u_MVP;
+
 void main(){
-    gl_Position = position;
+    gl_Position = u_MVP * position;
     v_texture_uv = texture_uv;
 };
 

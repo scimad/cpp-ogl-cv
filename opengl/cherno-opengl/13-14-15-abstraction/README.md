@@ -8,7 +8,7 @@ of that invalid context.
 (Though that behavoir is expected (which can be avoided by calling destructors before glfwTerminate() or as done [in the video right here](//https://youtu.be/bTHqmzjm2UI?list=PLlrATfBNZ98foTJPJ_Ev03o2oq3-GGOS2&t=1327), the behavoir is not seen in my implementation.))
 
 
-# Materials
+## Materials
 
 ```c++
 shader.bind();
@@ -20,4 +20,12 @@ The way to avoid above not-so-good way of passing uniforms to shader and eventua
 Materials = Shader & Set of Data (All it's Uniforms)
 uniforms can be renderer specific uniform or per object uniform. (Refer to [this](https://youtu.be/jjaTTRFXRAk?list=PLlrATfBNZ98foTJPJ_Ev03o2oq3-GGOS2&t=679))
 
+## [Blending](https://www.youtube.com/watch?v=o1_yJ60UIxs&list=PLlrATfBNZ98foTJPJ_Ev03o2oq3-GGOS2&index=18)
+Blending determines the how we combine our **output color** with what is already in our **target buffer**, where,
+    * output is the color that we output from the fragment shader (known as source).
+    * target buffer is the buffer our fragment shader is drawing to (known as destination).
 
+Related functions:
+    * glEnable(GL_BLEND)
+    * glBlendFunc(src, dest) => defaults are GL_ONE, and GL_ZERO
+    * glBlendEquation(mode) => default is GL_FUNC_ADD
