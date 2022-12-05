@@ -30,8 +30,6 @@ target_sources(maths-in-opengl PRIVATE main.cpp
     src/shader.cpp
     src/texture.cpp
 
-    ../../lib/src/glad.c
-
     ../../lib/src/ZR/core.cpp
     ../../lib/include/imgui/imgui.cpp
     ../../lib/include/imgui/imgui_demo.cpp
