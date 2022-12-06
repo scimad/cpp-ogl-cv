@@ -1,6 +1,34 @@
 #include <iostream>
 #include <memory>
 
+// Leaking memory example
+// #include <iostream>
+// using namespace std;
+ 
+// class Rectangle {
+// private:
+//     int length;
+//     int breadth;
+// };
+ 
+// void fun()
+// {
+//     // By taking a pointer p and
+//     // dynamically creating object
+//     // of class rectangle
+//     Rectangle* p = new Rectangle();
+//     // Do something with this rectangle
+// }
+ 
+// int main()
+// {
+//     // Infinite Loop
+//     while (1) {
+//         fun();
+//     }
+// }
+
+
 class TestClass{
 private:
     std::string my_name;
